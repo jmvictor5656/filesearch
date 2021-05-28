@@ -30,7 +30,7 @@ const ResultBody = ({searchResult=[]}) => {
         setPage(value);
     };
 
-    let rowsPerPage = 10;
+    let rowsPerPage = 5;
 
     function numberOfPages(n_results, rowsPerPage){
         console.log(n_results%rowsPerPage)

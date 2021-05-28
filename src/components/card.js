@@ -58,10 +58,7 @@ export default function CustomCard(props) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" onClick={download} >
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+          Download
         </Button>
       </CardActions>
     </Card>

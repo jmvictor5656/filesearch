@@ -3,6 +3,7 @@ import Card from './card'
 import { makeStyles } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid';
 import Checkbox from './checkbox'
+import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,27 +25,42 @@ const useStyles = makeStyles((theme) => ({
 
 const ResultBody = ({searchResult=[]}) => {
     const classes = useStyles();
+    const [page, setPage] = React.useState(1);
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
+    console.log(searchResult)
+    let rowsPerPage = 2;
+    function numberOfPages(n_results, rowsPerPage){
+        console.log(n_results%rowsPerPage)
+        let result =  (n_results%rowsPerPage) > 0 ? n_results/rowsPerPage + 1 : n_results/rowsPerPage
+        return Math.trunc(result)
+    }
   return (
     <Grid className={classes.root} container >
         <Grid item className={classes.Checkbox}>
             <Checkbox />
         </Grid>
-    { searchResult.map((data,index) => {
+    { 
+    searchResult.slice((page-1) * rowsPerPage, (page-1) * rowsPerPage + rowsPerPage).map((data,index) => {
         if (data) {
-        //   return (
-        //     <div key={data.name}>
-        //       <h1>{data._source.content}</h1>
-	    // </div>	
-
-    	//    )	
-        return (
-            <Grid item className={classes.item}>
-                <Card  filename={data._source.filename} content={data._source.content}/>
-            </Grid>
-        )
+            return (
+                <Grid item className={classes.item}>
+                    <Card  filename={data._source.filename} content={data._source.content}/>
+                </Grid>
+            )
     	 }
     	 return null
     }) }
+        {/* PAGINATION SUPPORT */}
+            { searchResult.length/rowsPerPage > 1 ? 
+                (<Grid item className={classes.item}>
+                    <Pagination count={numberOfPages(searchResult.length, rowsPerPage)} page={page} onChange={handleChange} />
+                </Grid>)
+                :
+                ""
+            }
+
     </Grid>
   );
 }

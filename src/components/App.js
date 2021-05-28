@@ -37,6 +37,7 @@ class App extends Component {
           value={this.state.value}
           onChange={(newValue) => this.setState({ value: newValue })}
           onRequestSearch={() => this.search(this.state.value)}
+          placeholder={"Type & Enter to Search"}
         />
         <List searchResult={this.state.data} />
         </div>

@@ -29,8 +29,9 @@ const ResultBody = ({searchResult=[]}) => {
     const handleChange = (event, value) => {
         setPage(value);
     };
-    console.log(searchResult)
-    let rowsPerPage = 2;
+
+    let rowsPerPage = 10;
+
     function numberOfPages(n_results, rowsPerPage){
         console.log(n_results%rowsPerPage)
         let result =  (n_results%rowsPerPage) > 0 ? n_results/rowsPerPage + 1 : n_results/rowsPerPage
